@@ -43,9 +43,9 @@ async function onSubmit() {
   <h2 class="text-2xl font-bold">Masuk</h2>
   <form class="mt-6 space-y-4" @submit.prevent="onSubmit">
     <div>
-      <label for="email" class="text-sm font-medium">Email</label>
+      <label for="login-email-input" class="text-sm font-medium">Email</label>
       <input
-        id="email"
+        id="login-email-input"
         type="email"
         :value="email"
         @input="onEmailChange"
@@ -53,9 +53,9 @@ async function onSubmit() {
       />
     </div>
     <div>
-      <label for="password" class="text-sm font-medium">Kata Sandi</label>
+      <label for="login-password-input" class="text-sm font-medium">Kata Sandi</label>
       <input
-        id="password"
+        id="login-password-input"
         type="password"
         :value="password"
         @input="onPasswordChange"
@@ -63,6 +63,7 @@ async function onSubmit() {
       />
     </div>
     <button
+      id="login-submit-button"
       type="submit"
       :disabled="isSubmitting"
       class="w-full rounded-lg bg-indigo-600 py-2 font-semibold text-white disabled:opacity-60"

@@ -24,13 +24,21 @@ function render() {
 }
 
 async function submit(wrapper, { email = "", password = "" } = {}) {
-  await wrapper.get("#email").setValue(email);
-  await wrapper.get("#password").setValue(password);
-  await wrapper.get("form").trigger("submit");
+  await wrapper.get("#login-email-input").setValue(email);
+  await wrapper.get("#login-password-input").setValue(password);
+  await wrapper.get("#login-submit-button").trigger("submit");
   await flushPromises();
 }
 
 describe("LoginPage", () => {
+  it("memakai ID yang dibutuhkan penguji otomatis", async () => {
+    const { wrapper } = await render();
+
+    expect(wrapper.find("#login-email-input").exists()).toBe(true);
+    expect(wrapper.find("#login-password-input").exists()).toBe(true);
+    expect(wrapper.find("#login-submit-button").exists()).toBe(true);
+  });
+
   it.each([
     ["email kosong", { email: "", password: "123456" }],
     ["kata sandi kosong", { email: "a@b.c", password: "" }],
@@ -51,7 +59,7 @@ describe("LoginPage", () => {
 
     expect(showErrorDialog).toHaveBeenCalledWith("Kata sandi salah");
     expect(router.currentRoute.value.fullPath).toBe("/auth/login");
-    expect(wrapper.get('button[type="submit"]').text()).toBe("Masuk");
+    expect(wrapper.get("#login-submit-button").text()).toBe("Masuk");
   });
 
   it("sukses: menyimpan token, menampilkan dialog, lalu pindah ke beranda", async () => {
@@ -74,11 +82,11 @@ describe("LoginPage", () => {
     let resolve;
     authApi.login.mockReturnValue(new Promise((r) => (resolve = r)));
     const { wrapper } = await render();
-    await wrapper.get("#email").setValue("a@b.c");
-    await wrapper.get("#password").setValue("123456");
+    await wrapper.get("#login-email-input").setValue("a@b.c");
+    await wrapper.get("#login-password-input").setValue("123456");
 
     await wrapper.get("form").trigger("submit");
-    const button = () => wrapper.get('button[type="submit"]');
+    const button = () => wrapper.get("#login-submit-button");
     expect(button().text()).toBe("Memproses...");
     expect(button().attributes("disabled")).toBeDefined();
 
