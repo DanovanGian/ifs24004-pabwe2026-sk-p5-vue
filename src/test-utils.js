@@ -1,8 +1,9 @@
 import { mount } from "@vue/test-utils";
 import { createPinia, setActivePinia } from "pinia";
+import { h } from "vue";
 import { createMemoryHistory, createRouter } from "vue-router";
 
-const Stub = { render: () => null };
+export const PageStub = { render: () => null };
 
 export function createMockPinia() {
   const pinia = createPinia();
@@ -16,7 +17,7 @@ export async function renderWithProviders(
 ) {
   const router = createRouter({
     history: createMemoryHistory(),
-    routes: routes || [{ path: "/:pathMatch(.*)*", component: Stub }],
+    routes: routes || [{ path: "/:pathMatch(.*)*", component: PageStub }],
   });
   router.push(route);
   await router.isReady();
@@ -28,4 +29,22 @@ export async function renderWithProviders(
   });
 
   return { wrapper, router, pinia };
+}
+
+// Komponen palsu: menampilkan props sebagai JSON dan satu tombol per event
+export function createStub(testId, events = [], props = []) {
+  return {
+    props,
+    emits: events,
+    setup(componentProps, { emit }) {
+      return () =>
+        h(
+          "div",
+          { "data-testid": testId, "data-props": JSON.stringify(componentProps) },
+          events.map((name) =>
+            h("button", { "data-testid": `${testId}-${name}`, onClick: () => emit(name) })
+          )
+        );
+    },
+  };
 }

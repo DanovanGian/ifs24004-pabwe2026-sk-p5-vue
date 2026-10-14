@@ -38,20 +38,17 @@ onMounted(async () => {
 });
 
 const isOwner = computed(
-  () => aucation.value && usersStore.profile && aucation.value.user_id === usersStore.profile.id
+  () => Boolean(usersStore.profile) && aucation.value.user_id === usersStore.profile.id
 );
 
-const isClosed = computed(() => {
-  if (!aucation.value) return false;
-  return new Date(aucation.value.closed_at) <= new Date();
-});
+const isClosed = computed(() => new Date(aucation.value.closed_at) <= new Date());
+
 
 const sortedBids = computed(() =>
-  [...(aucation.value?.bids || [])].sort((a, b) => Number(b.bid) - Number(a.bid))
+  [...(aucation.value.bids || [])].sort((a, b) => Number(b.bid) - Number(a.bid))
 );
 
 const currentHighest = computed(() => {
-  if (!aucation.value) return 0;
   const top = sortedBids.value[0];
   return top ? Number(top.bid) : Number(aucation.value.start_bid);
 });
