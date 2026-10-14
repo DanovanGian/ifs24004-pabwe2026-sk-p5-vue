@@ -26,7 +26,7 @@ onMounted(() => {
 });
 
 onBeforeUnmount(() => {
-  editor?.destroy();
+  editor.destroy();
 });
 </script>
 

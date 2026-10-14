@@ -12,21 +12,15 @@ export const useAuthStore = defineStore("auth", () => {
   async function login(payload) {
     isAuthLogin.value = false;
     const response = await authApi.login(payload);
-    console.log("LOGIN RESPONSE:", JSON.stringify(response));
 
     if (response.success) {
-      const newToken =
-        response.data?.token ??
-        response.data?.auth_token ??
-        response.data?.access_token;
-
+      const newToken = response.data?.token;
       if (!newToken) {
         return {
           success: false,
-          message: "Token tidak ditemukan pada respons server (cek console)",
+          message: "Token tidak ditemukan pada respons server",
         };
       }
-
       token.value = newToken;
       putAccessToken(newToken);
       isAuthLogin.value = true;
@@ -49,5 +43,13 @@ export const useAuthStore = defineStore("auth", () => {
     isAuthLogout.value = true;
   }
 
-  return { token, isAuthLogin, isAuthRegister, isAuthLogout, login, register, logout };
+  return {
+    token,
+    isAuthLogin,
+    isAuthRegister,
+    isAuthLogout,
+    login,
+    register,
+    logout,
+  };
 });
