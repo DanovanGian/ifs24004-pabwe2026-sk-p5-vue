@@ -18,7 +18,7 @@ async function onSubmit() {
     return;
   }
 
-    isSubmitting.value = true;
+  isSubmitting.value = true;
   let response;
   try {
     response = await authStore.login({
@@ -27,6 +27,11 @@ async function onSubmit() {
     });
   } finally {
     isSubmitting.value = false;
+  }
+
+  if (!response.success) {
+    showErrorDialog(response.message);
+    return;
   }
 
   await showSuccessDialog(response.message);
