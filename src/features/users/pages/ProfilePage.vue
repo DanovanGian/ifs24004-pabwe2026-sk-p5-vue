@@ -98,7 +98,7 @@ async function onSubmitPassword() {
     <div class="space-y-6">
       <form class="space-y-4 rounded-xl bg-white p-6 shadow-sm" @submit.prevent="onSubmitPhoto">
         <h2 class="font-semibold">Foto Profil</h2>
-        <input type="file" accept="image/*" @change="onPhotoSelected" />
+                <input type="file" accept="image/*" aria-label="Pilih foto profil" @change="onPhotoSelected" />
         <button type="submit" class="rounded-lg bg-indigo-600 px-4 py-2 font-semibold text-white">
           Unggah
         </button>

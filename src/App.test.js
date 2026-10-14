@@ -60,7 +60,7 @@ describe("App tanpa login", () => {
     const wrapper = await renderAt("/");
 
     expect(router.currentRoute.value.fullPath).toBe("/auth/login");
-    expect(wrapper.get("h2").text()).toBe("Masuk");
+    expect(wrapper.get("h1").text()).toBe("Masuk");
     expect(wrapper.text()).toContain("Delcom Auction");
   });
 
@@ -68,7 +68,7 @@ describe("App tanpa login", () => {
     const wrapper = await renderAt("/auth/register");
 
     expect(router.currentRoute.value.fullPath).toBe("/auth/register");
-    expect(wrapper.get("h2").text()).toBe("Daftar");
+    expect(wrapper.get("h1").text()).toBe("Daftar");
   });
 
   it("menampilkan halaman 404 untuk rute yang tidak dikenal", async () => {

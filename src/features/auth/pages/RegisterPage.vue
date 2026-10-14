@@ -42,7 +42,7 @@ async function onSubmit() {
 </script>
 
 <template>
-  <h2 class="text-2xl font-bold">Daftar</h2>
+  <h1 class="text-2xl font-bold">Daftar</h1>
   <form class="mt-6 space-y-4" @submit.prevent="onSubmit">
     <div>
       <label for="name" class="text-sm font-medium">Nama</label>

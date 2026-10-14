@@ -40,7 +40,7 @@ async function onSubmit() {
 </script>
 
 <template>
-  <h2 class="text-2xl font-bold">Masuk</h2>
+  <h1 class="text-2xl font-bold">Masuk</h1>
   <form class="mt-6 space-y-4" @submit.prevent="onSubmit">
     <div>
       <label for="login-email-input" class="text-sm font-medium">Email</label>

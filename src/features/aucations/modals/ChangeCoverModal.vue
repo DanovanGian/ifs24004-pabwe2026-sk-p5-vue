@@ -46,7 +46,13 @@ async function onSubmit() {
     <form class="w-full max-w-md space-y-4 rounded-2xl bg-white p-6" @submit.prevent="onSubmit">
       <h2 class="text-xl font-bold">Ganti Cover</h2>
 
-      <input type="file" accept="image/*" data-testid="cover-input" @change="onFileSelected" />
+       <input
+        type="file"
+        accept="image/*"
+        aria-label="Pilih gambar cover"
+        data-testid="cover-input"
+        @change="onFileSelected"
+      />
 
       <img
         v-if="previewUrl"
